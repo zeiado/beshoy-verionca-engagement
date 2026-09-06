@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -508,15 +508,10 @@
 
   <section>
     <h2 data-i18n="t10">The details</h2>
-    <div class="details-grid">
-      <div class="detail-block">
-        <h3 data-i18n="t11">Engagement ceremony</h3>
-        <span class="time" data-i18n="t13">4:00 PM</span>
-        <p data-i18n="t15">Remasia Hall, Obour City</p>
-      </div>
-      <div class="detail-block">
-        <h3 data-i18n="t12">Reception</h3>
-        <span class="time" data-i18n="t14">6:00 PM</span>
+    <div class="details-grid" style="grid-template-columns:minmax(0,1fr)">
+<div class="detail-block">
+        <h3 data-i18n="t12">Reception · Party begins</h3>
+        <span class="time" data-i18n="t14">5:00 PM</span>
         <p data-i18n="t15">Remasia Hall, Obour City</p>
       </div>
     </div>
@@ -545,42 +540,19 @@
   <div class="divider"><span></span></div>
 
   <section class="rsvp">
-    <h2 data-i18n="t21">RSVP</h2>
-    <p data-i18n="t22">Kindly respond by September 20, 2026</p>
+    <h2 data-i18n="t21">A note for the couple</h2>
+    <p data-i18n="t22">Leave your name and a message if you’d like.</p>
     <form id="rsvpForm" action="https://formspree.io/f/mgaeldpl" method="POST">
-      <div class="field-row">
-        <div>
-          <label for="name" data-i18n="t23">Full name</label>
-          <input type="text" id="name" name="name" required />
-        </div>
-        <div>
-          <label id="attendanceLabel" data-i18n="t24">Will you attend?</label>
-          <input type="hidden" id="attending" name="attending" value="yes">
-          <details class="attendance-picker" id="attendancePicker">
-            <summary aria-labelledby="attendanceLabel attendanceValue"><span id="attendanceValue">Joyfully accepts</span></summary>
-            <div class="attendance-options" role="group" aria-labelledby="attendanceLabel">
-              <label class="attendance-option"><input type="radio" name="attendanceChoice" value="yes" checked><span data-i18n="t25">Joyfully accepts</span></label>
-              <label class="attendance-option"><input type="radio" name="attendanceChoice" value="no"><span data-i18n="t26">Regretfully declines</span></label>
-            </div>
-          </details>
-        </div>
-      </div>
-      <div class="field-row">
-        <div>
-          <label for="guests" data-i18n="t27">Number of guests</label>
-          <input type="number" id="guests" name="guests" min="1" max="4" value="1" />
-        </div>
-        <div>
-          <label for="phone" data-i18n="t28">Phone number</label>
-          <input type="tel" id="phone" name="phone" />
-        </div>
+      <div>
+        <label for="name" data-i18n="t23">Full name</label>
+        <input type="text" id="name" name="name" autocomplete="name" required />
       </div>
       <div>
         <label for="message" data-i18n="t29">Message for the couple (optional)</label>
         <textarea id="message" name="message" rows="3"></textarea>
       </div>
-      <button type="submit" data-i18n="t30">Send RSVP</button>
-      <div class="rsvp-status" role="status" id="rsvpStatus" data-i18n="t31">Thank you — your RSVP has been recorded.</div>
+      <button type="submit" data-i18n="t30">Send</button>
+      <div class="rsvp-status" role="status" id="rsvpStatus" data-i18n="t31">Thank you — your note has been received.</div>
     </form>
   </section>
 
@@ -604,7 +576,7 @@ for (const [selector, assetId] of [['.flying-butterfly','butterflyAsset'],['.bot
  });
 }
 
-const translations = {"t0": {"en": "The engagement invitation", "ar": "دعوة خطوبة"}, "t1": {"en": "Felopater <em>&amp;</em> Ledia", "ar": "فيلوباتير <em>و</em> ليديا"}, "t2": {"en": "You are cordially invited", "ar": "بكل حب، ندعوكم لمشاركتنا فرحتنا"}, "t3": {"en": "Touch the seal to open", "ar": "المس الختم لفتح الدعوة"}, "t4": {"en": "Together with their families", "ar": "بكل حب، وبمشاركة عائلتيهما"}, "t5": {"en": "Felopater<span class=\"amp\">&amp;</span>Ledia", "ar": "فيلوباتير<span class=\"amp\">و</span>ليديا"}, "t6": {"en": "We're celebrating our engagement on <strong>October 8, 2026</strong>", "ar": "نحتفل بخطوبتنا يوم <strong>٨ أكتوبر ٢٠٢٦</strong>"}, "t7": {"en": "Our story", "ar": "حكايتنا"}, "t8": {"en": "What started as friendship turned into something neither of us saw coming. Somewhere between long conversations and small everyday moments, we found the person we wanted to keep choosing.", "ar": "بدأت حكايتنا بصداقة، ومع الكلام الطويل والتفاصيل الصغيرة كل يوم، لقينا في بعض الشخص اللي عاوزين نكمّل معاه العمر."}, "t9": {"en": "Now we're ready for the next chapter, and we'd love nothing more than to have you there with us as it begins.", "ar": "والنهارده بنبدأ فصل جديد من حكايتنا، وفرحتنا مش هتكمل غير بوجودكم معانا."}, "t10": {"en": "The details", "ar": "تفاصيل اليوم"}, "t11": {"en": "Engagement ceremony", "ar": "مراسم الخطوبة"}, "t12": {"en": "Reception", "ar": "حفل الاستقبال"}, "t13": {"en": "4:00 PM", "ar": "٤:٠٠ مساءً"}, "t14": {"en": "6:00 PM", "ar": "٦:٠٠ مساءً"}, "t15": {"en": "Remasia Hall, Obour City", "ar": "قاعة ريماسيا، مدينة العبور"}, "t16": {"en": "Venue", "ar": "مكان الحفل"}, "t17": {"en": "Remasia Hall", "ar": "قاعة ريماسيا"}, "t18": {"en": "Rd 10, Gamaiet Ahmed Orabi, Obour City, Cairo Governorate", "ar": "طريق ١٠، جمعية أحمد عرابي، مدينة العبور، محافظة القاهرة"}, "t19": {"en": "Open in Google Maps", "ar": "افتح على خرائط جوجل"}, "t20": {"en": "Get directions", "ar": "الاتجاهات"}, "t21": {"en": "RSVP", "ar": "تأكيد الحضور"}, "t22": {"en": "Kindly respond by September 20, 2026", "ar": "يُرجى تأكيد الحضور قبل ٢٠ سبتمبر ٢٠٢٦"}, "t23": {"en": "Full name", "ar": "الاسم بالكامل"}, "t24": {"en": "Will you attend?", "ar": "هتشاركنا فرحتنا؟"}, "t25": {"en": "Joyfully accepts", "ar": "بكل فرح، هكون معاكم"}, "t26": {"en": "Regretfully declines", "ar": "للأسف، مش هقدر أحضر"}, "t27": {"en": "Number of guests", "ar": "عدد الحضور"}, "t28": {"en": "Phone number", "ar": "رقم الموبايل"}, "t29": {"en": "Message for the couple (optional)", "ar": "رسالة لفيلوباتير وليديا (اختياري)"}, "t30": {"en": "Send RSVP", "ar": "إرسال الرد"}, "t31": {"en": "Thank you — your RSVP has been recorded.", "ar": "شكرًا — تم تسجيل ردّك."}, "t32": {"en": "Felopater &amp; Ledia", "ar": "فيلوباتير وليديا"}, "t33": {"en": "October 8, 2026 · Obour City, Cairo", "ar": "٨ أكتوبر ٢٠٢٦ · مدينة العبور، القاهرة"}};
+const translations = {"t0": {"en": "The engagement invitation", "ar": "دعوة خطوبة"}, "t1": {"en": "Felopater <em>&amp;</em> Ledia", "ar": "فيلوباتير <em>و</em> ليديا"}, "t2": {"en": "You are cordially invited", "ar": "بكل حب، ندعوكم لمشاركتنا فرحتنا"}, "t3": {"en": "Touch the seal to open", "ar": "المس الختم لفتح الدعوة"}, "t4": {"en": "Together with their families", "ar": "بكل حب، وبمشاركة عائلتيهما"}, "t5": {"en": "Felopater<span class=\"amp\">&amp;</span>Ledia", "ar": "فيلوباتير<span class=\"amp\">و</span>ليديا"}, "t6": {"en": "We're celebrating our engagement on <strong>October 8, 2026</strong>", "ar": "نحتفل بخطوبتنا يوم <strong>٨ أكتوبر ٢٠٢٦</strong>"}, "t7": {"en": "Our story", "ar": "حكايتنا"}, "t8": {"en": "What started as friendship turned into something neither of us saw coming. Somewhere between long conversations and small everyday moments, we found the person we wanted to keep choosing.", "ar": "بدأت حكايتنا بصداقة، ومع الكلام الطويل والتفاصيل الصغيرة كل يوم، لقينا في بعض الشخص اللي عاوزين نكمّل معاه العمر."}, "t9": {"en": "Now we're ready for the next chapter, and we'd love nothing more than to have you there with us as it begins.", "ar": "والنهارده بنبدأ فصل جديد من حكايتنا، وفرحتنا مش هتكمل غير بوجودكم معانا."}, "t10": {"en": "The details", "ar": "تفاصيل اليوم"}, "t12": {"en": "Reception · Party begins", "ar": "الاستقبال وبداية الحفل"}, "t14": {"en": "5:00 PM", "ar": "٥:٠٠ مساءً"}, "t15": {"en": "Remasia Hall, Obour City", "ar": "قاعة ريماسيا، مدينة العبور"}, "t16": {"en": "Venue", "ar": "مكان الحفل"}, "t17": {"en": "Remasia Hall", "ar": "قاعة ريماسيا"}, "t18": {"en": "Rd 10, Gamaiet Ahmed Orabi, Obour City, Cairo Governorate", "ar": "طريق ١٠، جمعية أحمد عرابي، مدينة العبور، محافظة القاهرة"}, "t19": {"en": "Open in Google Maps", "ar": "افتح على خرائط جوجل"}, "t20": {"en": "Get directions", "ar": "الاتجاهات"}, "t21": {"en": "A note for the couple", "ar": "كلمة لفيلوباتير وليديا"}, "t22": {"en": "Leave your name and a message if you’d like.", "ar": "سيب اسمك، ولو حابب اكتب لنا كلمة."}, "t23": {"en": "Full name", "ar": "الاسم بالكامل"}, "t29": {"en": "Message for the couple (optional)", "ar": "رسالة لفيلوباتير وليديا (اختياري)"}, "t30": {"en": "Send", "ar": "إرسال"}, "t31": {"en": "Thank you — your note has been received.", "ar": "شكرًا — تم استلام مشاركتك بنجاح."}, "t32": {"en": "Felopater &amp; Ledia", "ar": "فيلوباتير وليديا"}, "t33": {"en": "October 8, 2026 · Obour City, Cairo", "ar": "٨ أكتوبر ٢٠٢٦ · مدينة العبور، القاهرة"}};
 let language = new URLSearchParams(location.search).get('lang') === 'ar' ? 'ar' : 'en';
 const scene=document.getElementById('envelopeScene'), overlay=document.getElementById('envelopeOverlay'), content=document.getElementById('siteContent'), music=document.getElementById('bgMusic'), musicToggle=document.getElementById('musicToggle'), languageToggle=document.getElementById('languageToggle');
 const localized=(en,ar)=>language==='ar'?ar:en;
@@ -617,7 +589,7 @@ function setLanguage(next){
  document.querySelector('.hero img').alt=localized('Illustration of Felopater and Ledia dancing','رسم لفيلوباتير وليديا وهما بيرقصوا');
  document.querySelector('.map-frame').title=localized('Venue map','خريطة مكان الحفل');
  document.title=localized('Felopater & Ledia — Engagement · October 8, 2026','خطوبة فيلوباتير وليديا — ٨ أكتوبر ٢٠٢٦');
- updateMusic();updateAttendance();
+ updateMusic();
  const status=document.getElementById('rsvpStatus');if(status.dataset.state)showStatus(status.dataset.state);
 }
 languageToggle.addEventListener('click',()=>setLanguage(language==='ar'?'en':'ar'));
@@ -633,9 +605,9 @@ musicToggle.addEventListener('click',()=>{if(music.paused)music.play().then(upda
 function showStatus(state){
  const el=document.getElementById('rsvpStatus');
  const messages={
- sending:['Sending your RSVP…','جارٍ إرسال ردّك…'],
- success:['Thank you — your RSVP has been received.','شكرًا — تم استلام ردّك بنجاح.'],
- error:['Your RSVP could not be confirmed. Please try again or contact Felopater and Ledia.','تعذّر تأكيد إرسال ردّك. حاول مرة أخرى أو تواصل مع فيلوباتير وليديا.']
+ sending:['Sending…','جارٍ الإرسال…'],
+ success:['Thank you — your note has been received.','شكرًا — تم استلام مشاركتك بنجاح.'],
+ error:['Your submission could not be confirmed. Please try again or contact Felopater and Ledia.','تعذّر تأكيد الإرسال. حاول مرة أخرى أو تواصل مع فيلوباتير وليديا.']
  };
  el.dataset.state=state;el.style.display='block';el.style.color=state==='error'?'#983c32':'var(--ink-soft)';
  el.textContent=messages[state][language==='ar'?1:0];
@@ -645,38 +617,18 @@ async function submitRSVP(e){
  const form=e.currentTarget,button=form.querySelector('button[type="submit"]');
  if(button.disabled)return;
  button.disabled=true;form.setAttribute('aria-busy','true');showStatus('sending');
- const entry=Object.fromEntries(['name','attending','guests','phone','message'].map(id=>[id,document.getElementById(id).value]));
- if(entry.attending==='no')entry.guests='0';
+ const entry=Object.fromEntries(['name','message'].map(id=>[id,document.getElementById(id).value]));
  entry.language=language;
  const controller=new AbortController();
  const timeout=setTimeout(()=>controller.abort(),20000);
  try{
   const response=await fetch(form.action,{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify(entry),signal:controller.signal});
-  if(!response.ok)throw new Error('RSVP not accepted');
+  if(!response.ok)throw new Error('Submission not accepted');
   showStatus('success');form.reset();
  }catch{showStatus('error');}
  finally{clearTimeout(timeout);button.disabled=false;form.removeAttribute('aria-busy');}
 }
 document.getElementById('rsvpForm').addEventListener('submit',submitRSVP);
-
-const attendancePicker=document.getElementById('attendancePicker');
-const attending=document.getElementById('attending');
-function updateAttendance(){
- document.getElementById('attendanceValue').textContent=translations[attending.value==='no'?'t26':'t25'][language];
-}
-attendancePicker.addEventListener('change',event=>{
- if(event.target.name!=='attendanceChoice')return;
- attending.value=event.target.value;
- updateAttendance();attendancePicker.open=false;
- attendancePicker.querySelector('summary').focus({preventScroll:true});
-});
-attendancePicker.addEventListener('keydown',event=>{
- if(event.key==='Escape'){attendancePicker.open=false;attendancePicker.querySelector('summary').focus();}
-});
-document.addEventListener('click',event=>{if(!attendancePicker.contains(event.target))attendancePicker.open=false;});
-document.getElementById('rsvpForm').addEventListener('reset',()=>{
- attending.value='yes';attendancePicker.open=false;updateAttendance();
-});
 
 setLanguage(language);
 </script>
