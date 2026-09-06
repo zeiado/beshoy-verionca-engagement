@@ -547,11 +547,11 @@
   <section class="rsvp">
     <h2 data-i18n="t21">RSVP</h2>
     <p data-i18n="t22">Kindly respond by September 20, 2026</p>
-    <form id="rsvpForm">
+    <form id="rsvpForm" action="https://formspree.io/f/mgaeldpl" method="POST">
       <div class="field-row">
         <div>
           <label for="name" data-i18n="t23">Full name</label>
-          <input type="text" id="name" required />
+          <input type="text" id="name" name="name" required />
         </div>
         <div>
           <label id="attendanceLabel" data-i18n="t24">Will you attend?</label>
@@ -568,16 +568,16 @@
       <div class="field-row">
         <div>
           <label for="guests" data-i18n="t27">Number of guests</label>
-          <input type="number" id="guests" min="1" max="4" value="1" />
+          <input type="number" id="guests" name="guests" min="1" max="4" value="1" />
         </div>
         <div>
           <label for="phone" data-i18n="t28">Phone number</label>
-          <input type="tel" id="phone" />
+          <input type="tel" id="phone" name="phone" />
         </div>
       </div>
       <div>
         <label for="message" data-i18n="t29">Message for the couple (optional)</label>
-        <textarea id="message" rows="3"></textarea>
+        <textarea id="message" name="message" rows="3"></textarea>
       </div>
       <button type="submit" data-i18n="t30">Send RSVP</button>
       <div class="rsvp-status" role="status" id="rsvpStatus" data-i18n="t31">Thank you — your RSVP has been recorded.</div>
@@ -630,13 +630,34 @@ scene.addEventListener('click',()=>{
  setTimeout(()=>{content.classList.add('revealed');overlay.classList.add('hidden');content.inert=false;content.removeAttribute('inert');document.body.classList.remove('intro-active');document.querySelector('.hero h1').focus({preventScroll:true});},reduced?0:3300);
 });
 musicToggle.addEventListener('click',()=>{if(music.paused)music.play().then(updateMusic).catch(()=>{});else{music.pause();updateMusic();}});
-function showStatus(state){const el=document.getElementById('rsvpStatus');el.dataset.state=state;el.style.display='block';el.textContent=state==='success'?localized('Thank you — your RSVP has been recorded.','شكرًا — تم تسجيل ردّك.'):localized('Online RSVP is not available yet. Please contact the couple to confirm.','تأكيد الحضور عبر الموقع غير متاح حاليًا. يُرجى التواصل مع فيلوباتير وليديا لتأكيد حضورك.');}
-document.getElementById('rsvpForm').addEventListener('submit',async e=>{
- e.preventDefault();if(!window.storage?.set){showStatus('unavailable');return;}
- const form=e.currentTarget,button=form.querySelector('button[type="submit"]');button.disabled=true;
- const entry=Object.fromEntries(['name','attending','guests','phone','message'].map(id=>[id,document.getElementById(id).value]));entry.submittedAt=new Date().toISOString();
- try{await window.storage.set('rsvp:'+Date.now()+':'+Math.random().toString(36).slice(2),JSON.stringify(entry),true);showStatus('success');form.reset();}catch{showStatus('unavailable');}finally{button.disabled=false;}
-});
+function showStatus(state){
+ const el=document.getElementById('rsvpStatus');
+ const messages={
+ sending:['Sending your RSVP…','جارٍ إرسال ردّك…'],
+ success:['Thank you — your RSVP has been received.','شكرًا — تم استلام ردّك بنجاح.'],
+ error:['Your RSVP could not be confirmed. Please try again or contact Felopater and Ledia.','تعذّر تأكيد إرسال ردّك. حاول مرة أخرى أو تواصل مع فيلوباتير وليديا.']
+ };
+ el.dataset.state=state;el.style.display='block';el.style.color=state==='error'?'#983c32':'var(--ink-soft)';
+ el.textContent=messages[state][language==='ar'?1:0];
+}
+async function submitRSVP(e){
+ e.preventDefault();
+ const form=e.currentTarget,button=form.querySelector('button[type="submit"]');
+ if(button.disabled)return;
+ button.disabled=true;form.setAttribute('aria-busy','true');showStatus('sending');
+ const entry=Object.fromEntries(['name','attending','guests','phone','message'].map(id=>[id,document.getElementById(id).value]));
+ if(entry.attending==='no')entry.guests='0';
+ entry.language=language;
+ const controller=new AbortController();
+ const timeout=setTimeout(()=>controller.abort(),20000);
+ try{
+  const response=await fetch(form.action,{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify(entry),signal:controller.signal});
+  if(!response.ok)throw new Error('RSVP not accepted');
+  showStatus('success');form.reset();
+ }catch{showStatus('error');}
+ finally{clearTimeout(timeout);button.disabled=false;form.removeAttribute('aria-busy');}
+}
+document.getElementById('rsvpForm').addEventListener('submit',submitRSVP);
 
 const attendancePicker=document.getElementById('attendancePicker');
 const attending=document.getElementById('attending');
