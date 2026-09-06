@@ -429,6 +429,36 @@
 
 
 #butterflyAsset,#branchAsset{display:none!important;}
+
+  .event-calendar-section{text-align:center;padding-top:48px;padding-bottom:48px;}
+  .event-date-line{display:flex;justify-content:center;align-items:center;gap:22px;color:var(--rose-deep);}
+  .event-date-line span{font-size:14px;letter-spacing:.08em;}
+  .event-date-line strong{font-family:'Cormorant Garamond',serif;font-size:62px;font-weight:500;line-height:1.1;padding:0 22px;border-inline:1px solid #b6935260;}
+  .event-year{margin-top:12px;color:var(--ink-soft);font-family:'Cormorant Garamond',serif;font-size:24px;}
+  .event-calendar-section .countdown-heading{font-size:28px;margin:28px 0 16px;color:var(--rose-deep);}
+  .countdown{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));max-width:390px;margin:0 auto 12px;gap:8px;direction:ltr;}
+  .countdown-item{padding:12px 4px;border-bottom:1px solid #b6935255;}
+  .countdown-item strong{display:block;font-family:'Cormorant Garamond',serif;font-size:40px;line-height:1.15;color:#977339;font-weight:500;font-variant-numeric:tabular-nums;}
+  .countdown-item span{display:block;font-size:12px;margin-top:7px;color:var(--ink-soft);}
+  .event-time-note{font-size:14px;color:var(--ink-soft);margin:18px 0 30px;}
+  .calendar-frame{position:relative;isolation:isolate;padding:30px 24px 24px;background:#fffdf7;border:1px solid #b89451;outline:1px solid #b8945145;outline-offset:-7px;box-shadow:0 10px 35px #8c66440b;overflow:hidden;}
+  .calendar-frame h3{position:relative;font-size:29px;color:var(--rose-deep);margin-bottom:18px;}
+  .calendar-sprig{position:absolute;width:130px;height:130px;pointer-events:none;opacity:.35;z-index:-1;}
+  .calendar-sprig img{width:100%;height:100%;object-fit:contain;}
+  .calendar-sprig:nth-child(1){top:-35px;left:-38px;transform:rotate(25deg);}
+  .calendar-sprig:nth-child(2){bottom:-35px;right:-38px;transform:rotate(205deg);}
+  .month-table{width:100%;border-collapse:collapse;table-layout:fixed;direction:ltr;font-size:16px;}
+  .month-table th{font-size:12px;font-weight:500;color:#8a7758;border-bottom:1px solid #b8945166;padding:8px 0 13px;}
+  .month-table td{height:52px;text-align:center;color:var(--ink-soft);font-variant-numeric:tabular-nums;}
+  .event-day{position:relative;display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:linear-gradient(145deg,#c2a16a,#987039);color:#fffaf0;font-weight:600;box-shadow:0 3px 9px #98703925;}
+  .event-day::after{content:'♥';position:absolute;right:-5px;top:-8px;font-size:13px;color:#967039;background:#fffdf7;border-radius:50%;width:18px;height:18px;line-height:18px;}
+  .calendar-legend{margin-top:14px;font-size:13px;color:var(--rose-deep);}
+  .add-calendar{background:transparent;color:var(--rose-deep);border-bottom:1px solid #b89451;padding:8px 4px;margin-top:22px;min-height:44px;}
+  .add-calendar:hover{background:#b8945110;color:var(--ink);}
+  html[lang="ar"] .event-date-line span{letter-spacing:0;}
+  html[lang="ar"] .month-table th{font-size:11px;}
+  @media(max-width:480px){.calendar-frame{padding:28px 13px 20px;}.event-date-line{gap:14px;}.event-date-line strong{font-size:54px;padding:0 17px;}.event-date-line span{font-size:13px;}.month-table td{height:45px;}.countdown-item strong{font-size:34px;}.calendar-frame h3{font-size:26px;}}
+
 </style>
 </head>
 <body class="intro-active">
@@ -496,6 +526,28 @@
     <div class="hero-date" data-i18n="t6">We're celebrating our engagement on <strong>October 8, 2026</strong></div>
   </div>
 
+  <div class="divider"><span></span></div>
+
+
+  <section class="event-calendar-section" aria-labelledby="countdownHeading">
+    <div class="event-date-line"><span data-i18n="calThursday">Thursday</span><strong>08</strong><span data-i18n="calOctober">October</span></div>
+    <p class="event-year">2026</p>
+    <h2 class="countdown-heading" id="countdownHeading" data-i18n="calCountdown">Counting down to our celebration</h2>
+    <div class="countdown" role="timer" aria-live="off" aria-labelledby="countdownHeading">
+      <div class="countdown-item"><strong id="countDays">00</strong><span data-i18n="calDays">Days</span></div>
+      <div class="countdown-item"><strong id="countHours">00</strong><span data-i18n="calHours">Hours</span></div>
+      <div class="countdown-item"><strong id="countMinutes">00</strong><span data-i18n="calMinutes">Minutes</span></div>
+      <div class="countdown-item"><strong id="countSeconds">00</strong><span data-i18n="calSeconds">Seconds</span></div>
+    </div>
+    <p class="event-time-note" id="eventTimeNote" data-i18n="calTime">The party begins at 5:00 PM · Cairo time</p>
+    <div class="calendar-frame">
+      <span class="calendar-sprig" aria-hidden="true"></span><span class="calendar-sprig" aria-hidden="true"></span>
+      <h3 id="calendarMonth" data-i18n="calMonth">October 2026</h3>
+      <table class="month-table" aria-labelledby="calendarMonth"><thead><tr id="calendarWeekdays"></tr></thead><tbody id="calendarDates"></tbody></table>
+      <p class="calendar-legend" data-i18n="calLegend">October 8 · Our engagement celebration</p>
+    </div>
+    <button class="add-calendar" id="addCalendar" type="button" data-i18n="calAdd">Add to calendar</button>
+  </section>
   <div class="divider"><span></span></div>
 
   <section class="story">
@@ -568,7 +620,7 @@
 <script>
 
 // Use image elements: large artwork in CSS custom properties can be rejected.
-for (const [selector, assetId] of [['.flying-butterfly','butterflyAsset'],['.botanical-branch, .botanical-divider','branchAsset']]) {
+for (const [selector, assetId] of [['.flying-butterfly','butterflyAsset'],['.botanical-branch, .botanical-divider, .calendar-sprig','branchAsset']]) {
  const source=document.getElementById(assetId);
  document.querySelectorAll(selector).forEach(container=>{
   const art=new Image();art.alt='';art.width=source.width;art.height=source.height;
@@ -576,7 +628,7 @@ for (const [selector, assetId] of [['.flying-butterfly','butterflyAsset'],['.bot
  });
 }
 
-const translations = {"t0": {"en": "The engagement invitation", "ar": "دعوة خطوبة"}, "t1": {"en": "Felopater <em>&amp;</em> Ledia", "ar": "فيلوباتير <em>و</em> ليديا"}, "t2": {"en": "You are cordially invited", "ar": "بكل حب، ندعوكم لمشاركتنا فرحتنا"}, "t3": {"en": "Touch the seal to open", "ar": "المس الختم لفتح الدعوة"}, "t4": {"en": "Together with their families", "ar": "بكل حب، وبمشاركة عائلتيهما"}, "t5": {"en": "Felopater<span class=\"amp\">&amp;</span>Ledia", "ar": "فيلوباتير<span class=\"amp\">و</span>ليديا"}, "t6": {"en": "We're celebrating our engagement on <strong>October 8, 2026</strong>", "ar": "نحتفل بخطوبتنا يوم <strong>٨ أكتوبر ٢٠٢٦</strong>"}, "t7": {"en": "Our story", "ar": "حكايتنا"}, "t8": {"en": "What started as friendship turned into something neither of us saw coming. Somewhere between long conversations and small everyday moments, we found the person we wanted to keep choosing.", "ar": "بدأت حكايتنا بصداقة، ومع الكلام الطويل والتفاصيل الصغيرة كل يوم، لقينا في بعض الشخص اللي عاوزين نكمّل معاه العمر."}, "t9": {"en": "Now we're ready for the next chapter, and we'd love nothing more than to have you there with us as it begins.", "ar": "والنهارده بنبدأ فصل جديد من حكايتنا، وفرحتنا مش هتكمل غير بوجودكم معانا."}, "t10": {"en": "The details", "ar": "تفاصيل اليوم"}, "t12": {"en": "Reception · Party begins", "ar": "الاستقبال وبداية الحفل"}, "t14": {"en": "5:00 PM", "ar": "٥:٠٠ مساءً"}, "t15": {"en": "Remasia Hall, Obour City", "ar": "قاعة ريماسيا، مدينة العبور"}, "t16": {"en": "Venue", "ar": "مكان الحفل"}, "t17": {"en": "Remasia Hall", "ar": "قاعة ريماسيا"}, "t18": {"en": "Rd 10, Gamaiet Ahmed Orabi, Obour City, Cairo Governorate", "ar": "طريق ١٠، جمعية أحمد عرابي، مدينة العبور، محافظة القاهرة"}, "t19": {"en": "Open in Google Maps", "ar": "افتح على خرائط جوجل"}, "t20": {"en": "Get directions", "ar": "الاتجاهات"}, "t21": {"en": "A note for the couple", "ar": "كلمة لفيلوباتير وليديا"}, "t22": {"en": "Leave your name and a message if you’d like.", "ar": "سيب اسمك، ولو حابب اكتب لنا كلمة."}, "t23": {"en": "Full name", "ar": "الاسم بالكامل"}, "t29": {"en": "Message for the couple (optional)", "ar": "رسالة لفيلوباتير وليديا (اختياري)"}, "t30": {"en": "Send", "ar": "إرسال"}, "t31": {"en": "Thank you — your note has been received.", "ar": "شكرًا — تم استلام مشاركتك بنجاح."}, "t32": {"en": "Felopater &amp; Ledia", "ar": "فيلوباتير وليديا"}, "t33": {"en": "October 8, 2026 · Obour City, Cairo", "ar": "٨ أكتوبر ٢٠٢٦ · مدينة العبور، القاهرة"}};
+const translations = {"t0": {"en": "The engagement invitation", "ar": "دعوة خطوبة"}, "t1": {"en": "Felopater <em>&amp;</em> Ledia", "ar": "فيلوباتير <em>و</em> ليديا"}, "t2": {"en": "You are cordially invited", "ar": "بكل حب، ندعوكم لمشاركتنا فرحتنا"}, "t3": {"en": "Touch the seal to open", "ar": "المس الختم لفتح الدعوة"}, "t4": {"en": "Together with their families", "ar": "بكل حب، وبمشاركة عائلتيهما"}, "t5": {"en": "Felopater<span class=\"amp\">&amp;</span>Ledia", "ar": "فيلوباتير<span class=\"amp\">و</span>ليديا"}, "t6": {"en": "We're celebrating our engagement on <strong>October 8, 2026</strong>", "ar": "نحتفل بخطوبتنا يوم <strong>٨ أكتوبر ٢٠٢٦</strong>"}, "t7": {"en": "Our story", "ar": "حكايتنا"}, "t8": {"en": "What started as friendship turned into something neither of us saw coming. Somewhere between long conversations and small everyday moments, we found the person we wanted to keep choosing.", "ar": "بدأت حكايتنا بصداقة، ومع الكلام الطويل والتفاصيل الصغيرة كل يوم، لقينا في بعض الشخص اللي عاوزين نكمّل معاه العمر."}, "t9": {"en": "Now we're ready for the next chapter, and we'd love nothing more than to have you there with us as it begins.", "ar": "والنهارده بنبدأ فصل جديد من حكايتنا، وفرحتنا مش هتكمل غير بوجودكم معانا."}, "t10": {"en": "The details", "ar": "تفاصيل اليوم"}, "t12": {"en": "Reception · Party begins", "ar": "الاستقبال وبداية الحفل"}, "t14": {"en": "5:00 PM", "ar": "٥:٠٠ مساءً"}, "t15": {"en": "Remasia Hall, Obour City", "ar": "قاعة ريماسيا، مدينة العبور"}, "t16": {"en": "Venue", "ar": "مكان الحفل"}, "t17": {"en": "Remasia Hall", "ar": "قاعة ريماسيا"}, "t18": {"en": "Rd 10, Gamaiet Ahmed Orabi, Obour City, Cairo Governorate", "ar": "طريق ١٠، جمعية أحمد عرابي، مدينة العبور، محافظة القاهرة"}, "t19": {"en": "Open in Google Maps", "ar": "افتح على خرائط جوجل"}, "t20": {"en": "Get directions", "ar": "الاتجاهات"}, "t21": {"en": "A note for the couple", "ar": "كلمة لفيلوباتير وليديا"}, "t22": {"en": "Leave your name and a message if you’d like.", "ar": "سيب اسمك، ولو حابب اكتب لنا كلمة."}, "t23": {"en": "Full name", "ar": "الاسم بالكامل"}, "t29": {"en": "Message for the couple (optional)", "ar": "رسالة لفيلوباتير وليديا (اختياري)"}, "t30": {"en": "Send", "ar": "إرسال"}, "t31": {"en": "Thank you — your note has been received.", "ar": "شكرًا — تم استلام مشاركتك بنجاح."}, "t32": {"en": "Felopater &amp; Ledia", "ar": "فيلوباتير وليديا"}, "t33": {"en": "October 8, 2026 · Obour City, Cairo", "ar": "٨ أكتوبر ٢٠٢٦ · مدينة العبور، القاهرة"}, "calThursday": {"en": "Thursday", "ar": "الخميس"}, "calOctober": {"en": "October", "ar": "أكتوبر"}, "calCountdown": {"en": "Counting down to our celebration", "ar": "باقي على فرحتنا"}, "calDays": {"en": "Days", "ar": "يوم"}, "calHours": {"en": "Hours", "ar": "ساعة"}, "calMinutes": {"en": "Minutes", "ar": "دقيقة"}, "calSeconds": {"en": "Seconds", "ar": "ثانية"}, "calTime": {"en": "The party begins at 5:00 PM · Cairo time", "ar": "بداية الحفل الساعة ٥ مساءً · بتوقيت القاهرة"}, "calMonth": {"en": "October 2026", "ar": "أكتوبر ٢٠٢٦"}, "calLegend": {"en": "October 8 · Our engagement celebration", "ar": "٨ أكتوبر · حفل خطوبتنا"}, "calAdd": {"en": "Add to calendar", "ar": "أضف إلى التقويم"}};
 let language = new URLSearchParams(location.search).get('lang') === 'ar' ? 'ar' : 'en';
 const scene=document.getElementById('envelopeScene'), overlay=document.getElementById('envelopeOverlay'), content=document.getElementById('siteContent'), music=document.getElementById('bgMusic'), musicToggle=document.getElementById('musicToggle'), languageToggle=document.getElementById('languageToggle');
 const localized=(en,ar)=>language==='ar'?ar:en;
@@ -589,7 +641,7 @@ function setLanguage(next){
  document.querySelector('.hero img').alt=localized('Illustration of Felopater and Ledia dancing','رسم لفيلوباتير وليديا وهما بيرقصوا');
  document.querySelector('.map-frame').title=localized('Venue map','خريطة مكان الحفل');
  document.title=localized('Felopater & Ledia — Engagement · October 8, 2026','خطوبة فيلوباتير وليديا — ٨ أكتوبر ٢٠٢٦');
- updateMusic();
+ updateMusic();renderCalendar();updateCountdown();
  const status=document.getElementById('rsvpStatus');if(status.dataset.state)showStatus(status.dataset.state);
 }
 languageToggle.addEventListener('click',()=>setLanguage(language==='ar'?'en':'ar'));
@@ -629,6 +681,43 @@ async function submitRSVP(e){
  finally{clearTimeout(timeout);button.disabled=false;form.removeAttribute('aria-busy');}
 }
 document.getElementById('rsvpForm').addEventListener('submit',submitRSVP);
+
+
+// 8 October 2026, 17:00 in Africa/Cairo (UTC+03:00 on this date).
+const eventStart=Date.parse('2026-10-08T17:00:00+03:00');
+function countdownParts(now){
+ const total=Math.max(0,Math.floor((eventStart-now)/1000));
+ return [Math.floor(total/86400),Math.floor(total/3600)%24,Math.floor(total/60)%60,total%60];
+}
+function updateCountdown(){
+ const now=Date.now();
+ countdownParts(now).forEach((value,i)=>document.getElementById(['countDays','countHours','countMinutes','countSeconds'][i]).textContent=String(value).padStart(2,'0'));
+ if(now>=eventStart)document.getElementById('eventTimeNote').textContent=localized('Our celebration day is here!','يوم فرحتنا وصل!');
+}
+function renderCalendar(){
+ const names=language==='ar'?['الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت','الأحد']:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+ document.getElementById('calendarWeekdays').innerHTML=names.map(name=>'<th scope="col">'+name+'</th>').join('');
+ const first=(new Date(Date.UTC(2026,9,1)).getUTCDay()+6)%7;
+ let rows='';
+ for(let week=0;week<5;week++){
+  rows+='<tr>';
+  for(let day=0;day<7;day++){
+   const date=week*7+day-first+1;
+   const label=date>0&&date<=31?String(date):'';
+   rows+='<td>'+(date===8?'<span class="event-day" aria-label="'+localized('October 8, engagement celebration at 5 PM Cairo time','٨ أكتوبر، حفل الخطوبة الساعة ٥ مساءً بتوقيت القاهرة')+'">8</span>':label)+'</td>';
+  }
+  rows+='</tr>';
+ }
+ document.getElementById('calendarDates').innerHTML=rows;
+}
+document.getElementById('addCalendar').addEventListener('click',()=>{
+ const stamp=new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d{3}Z$/,'Z');
+ const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Felopater and Ledia//Engagement Invitation//EN','CALSCALE:GREGORIAN','BEGIN:VEVENT','UID:felopater-ledia-20261008@invitation','DTSTAMP:'+stamp,'DTSTART:20261008T140000Z','SUMMARY:Felopater & Ledia - Engagement celebration','LOCATION:Remasia Hall\\, Obour City','DESCRIPTION:Join us at 5 PM Cairo time for our engagement celebration.','END:VEVENT','END:VCALENDAR'];
+ const url=URL.createObjectURL(new Blob([lines.join('\r\n')+'\r\n'],{type:'text/calendar;charset=utf-8'}));
+ const link=document.createElement('a');link.href=url;link.download='felopater-ledia-engagement.ics';document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
+setInterval(()=>{if(!document.hidden)updateCountdown();},1000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)updateCountdown();});
 
 setLanguage(language);
 </script>
